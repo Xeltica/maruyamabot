@@ -4,6 +4,22 @@
 
 身内鯖向けの bot です。ご参考までにどうぞ
 
+## 動かし方
+
+.env を作って、次のものを書く
+
+```conf
+BOT_TOKEN=Discord Botのトークン
+SIRITORI_CHANNEL=しりとりチャンネルのID
+```
+
+コマンドを叩く
+
+```
+yarn install
+yarn build
+yarn start
+```
 
 ## LICENSE
 
