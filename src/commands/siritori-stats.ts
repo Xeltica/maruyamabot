@@ -1,11 +1,12 @@
 import { Client, Message, TextChannel } from "discord.js";
 import Enumerable from "linq";
 import errors from "../errors";
+import { getSiritoriChannel } from "../misc/env";
 import { fetchAllMessages } from "../misc/fetchAllMessages";
 import { define } from "./define";
 
 export default define('siritori-stats', 'しりとりのスコアを表示します', async (args: string[], _mes: Message, cli: Client) => {
-    const id = process.env.SIRITORI_CHANNELS;
+    const id = getSiritoriChannel();
     if (!id) return errors.siritoriChannelsNotDefined.toString();
 
     const ch = await cli.channels.fetch(id);

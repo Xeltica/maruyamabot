@@ -1,6 +1,5 @@
 import { Client, DMChannel, Message, TextChannel } from "discord.js";
 import { getCommand } from "../commands";
-import { fetchAllMessages } from "../misc/fetchAllMessages";
 
 export default async (msg: Message, cli: Client): Promise<void> => {
     const prefix = process.env.COMMAND_PREFIX ?? '!!';
