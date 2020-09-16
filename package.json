@@ -17,7 +17,8 @@
    },
    "dependencies": {
       "discord.js": "^12.2.0",
-      "dotenv": "^8.2.0"
+      "dotenv": "^8.2.0",
+      "linq": "^3.2.3"
    },
    "devDependencies": {
       "@types/node": "^8.0.29",

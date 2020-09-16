@@ -6,15 +6,16 @@ import { Client, TextChannel, Message } from 'discord.js';
 import { akaneAA } from "./misc/aa";
 import { messageHandlers } from './handlers';
 import dotenv from 'dotenv';
+import { getBotToken, getSiritoriChannel } from './misc/env';
 
 dotenv.config();
 
-if (!process.env.BOT_TOKEN) {
+if (!getBotToken()) {
     console.error('BOT_TOKEN が未定義です。.env ファイルに記載してください');
     process.exit(-1);
 }
 
-if (!process.env.SIRITORI_CHANNEL) {
+if (!getSiritoriChannel()) {
     console.error('SIRITORI_CHANNEL が未定義です。.env ファイルに記載してください');
     process.exit(-1);
 }
@@ -43,4 +44,4 @@ cli.on('message', msg => {
     messageHandlers.forEach(handler => handler(msg, cli));
 });
 
-cli.login(process.env.BOT_TOKEN);
+cli.login(getBotToken());

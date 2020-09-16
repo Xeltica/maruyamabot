@@ -1087,6 +1087,11 @@ levn@^0.4.1:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
 
+linq@^3.2.3:
+  version "3.2.3"
+  resolved "https://registry.yarnpkg.com/linq/-/linq-3.2.3.tgz#5d9fd6da4e89742d4c447e3d657e74cb254e339d"
+  integrity sha512-OI48ncDVi29Hc4g5+hPd58AkI8YtLUFkZWWvvyC+w1+j8PsDi28tLZnbv3+8PvxSiJUEQDihkQjrIrPkFzEFqQ==
+
 load-json-file@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/load-json-file/-/load-json-file-4.0.0.tgz#2f5f45ab91e33216234fd53adab668eb4ec0993b"

@@ -1,30 +1,18 @@
 import { Message, Client, TextChannel } from 'discord.js';
+import { getSiritoriChannel } from '../misc/env';
+import { fetchAllMessages } from '../misc/fetchAllMessages';
 
 let lastErrorMessageId = null as string | null;
 
 export default async (msg: Message, cli: Client): Promise<void> => {
     const ch = msg.channel;
-    if (ch.id === process.env.SIRITORI_CHANNEL && ch instanceof TextChannel) {
+    if (ch.id === getSiritoriChannel() && ch instanceof TextChannel) {
         if (lastErrorMessageId) {
             await ch.messages.delete(lastErrorMessageId);
         }
-        // しりとりチャンネルやぞ
-        const text = msg.content.trim().toLowerCase();
         
-        const words: string[] = [];
-
-        let temp: Message[] = [];
-        let id: string | null = null;
-
-        // 過去ログ
-        do {
-            temp = (await ch.messages.fetch({ limit: 100, before: id ?? undefined }))
-                .filter(mes => mes.type === 'DEFAULT' && !!mes.content)
-                .array();
-            words.push(...temp.map(mes => mes.content.trim().toLocaleLowerCase()));
-            if (temp.length > 0) id = temp[temp.length - 1].id;
-        } while (temp.length > 0);
-
+        const text = msg.content.trim().toLowerCase();
+        const words: string[] = (await fetchAllMessages(ch)).map(mes => mes.content.trim().toLocaleLowerCase());
         // 最初に取得したデータは今回の発言なので消す
         words.shift();
 
