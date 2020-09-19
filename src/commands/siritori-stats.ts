@@ -25,7 +25,7 @@ export default define('siritori-stats', 'しりとりのスコアを表示しま
         .groupBy(m => m.author)
         .select(g => ({ name: g.key().username, count: g.count() }))
         .orderByDescending(score => score.count)
-        .select((g, i) => `${rank(i + 1)}${g.name}: ${g.count}回`)
+        .select((g, i) => `${rank(i + 1)}  ${g.name}  ${g.count}回`)
         .toJoinedString('\n ');
 
     return allTurns == 0 ? 'しりとりは始まっていません。' :
