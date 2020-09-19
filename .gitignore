@@ -2,3 +2,4 @@ node_modules
 built
 .env
 yarn-error.log
+.DS_Store

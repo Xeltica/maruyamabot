@@ -5,6 +5,11 @@ import { getSiritoriChannel } from "../misc/env";
 import { fetchAllMessages } from "../misc/fetchAllMessages";
 import { define } from "./define";
 
+export const rank = (i: number) =>
+    i == 1 ? "🥇 1位" :
+    i == 2 ? "🥈 2位" :
+    i == 3 ? "🥉 3位" : `　  ${i}位`;
+
 export default define('siritori-stats', 'しりとりのスコアを表示します', async (args: string[], _mes: Message, cli: Client) => {
     const id = getSiritoriChannel();
     if (!id) return errors.siritoriChannelsNotDefined.toString();
@@ -20,7 +25,7 @@ export default define('siritori-stats', 'しりとりのスコアを表示しま
         .groupBy(m => m.author)
         .select(g => ({ name: g.key().username, count: g.count() }))
         .orderByDescending(score => score.count)
-        .select(g => `${g.name}: ${g.count}回`)
+        .select((g, i) => `${rank(i + 1)}${g.name}: ${g.count}回`)
         .toJoinedString('\n ');
 
     return allTurns == 0 ? 'しりとりは始まっていません。' :
