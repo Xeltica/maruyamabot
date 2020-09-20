@@ -1,4 +1,4 @@
-import { Client, DMChannel, Message, TextChannel } from "discord.js";
+import { Client, Message } from "discord.js";
 import { getCommand } from "../commands";
 
 export default async (msg: Message, cli: Client): Promise<void> => {

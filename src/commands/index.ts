@@ -1,5 +1,5 @@
 import channel from "./channel";
-import { define, MBCommandDefinition } from "./define";
+import { MBCommandDefinition } from "./define";
 import echo from "./echo";
 import help from "./help";
 import isAdmin from "./is-admin";
