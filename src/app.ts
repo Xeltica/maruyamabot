@@ -6,7 +6,7 @@ import { Client, TextChannel, Message } from 'discord.js';
 import { akaneAA } from "./misc/aa";
 import { messageHandlers } from './handlers';
 import dotenv from 'dotenv';
-import { getBotToken, getSiritoriChannel } from './misc/env';
+import { getAdmins, getBotToken, getSiritoriChannel } from './misc/env';
 
 dotenv.config();
 
@@ -38,6 +38,11 @@ cli.on('ready', async () => {
             url: 'https://227-game.com/',
         }
     });
+
+    console.log('admin Id: ');
+    for (const id of getAdmins()) {
+        console.log(' ' + id);
+    }
 });
 
 cli.on('message', msg => {
