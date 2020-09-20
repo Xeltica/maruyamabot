@@ -1,6 +1,5 @@
 import { Client, Message, TextChannel, UserFlags } from "discord.js";
-import errors from "../errors";
-import { getSiritoriChannel } from "../misc/env";
+import { extractChannels } from "../misc/extract";
 import { fetchAllMessages } from "../misc/fetchAllMessages";
 import { isAdmin } from "../misc/isAdmin";
 import { define } from "./define";
@@ -9,9 +8,9 @@ export default define('vacuum', '指定したチャンネルをリセットし�
     if (args.length !== 1) {
         return '/vacuum <channel>';
     }
-    const id = args[0];
+    const id = extractChannels(args[0])[0];
 
-    const ch = await cli.channels.fetch(id);
+    const ch = id ? await cli.channels.fetch(id) : null;
     if (!(ch instanceof TextChannel)) return 'Specify the text channel.';
 
     if (!msg.guild) return 'サーバーから呼び出してください。';

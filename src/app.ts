@@ -2,11 +2,13 @@
  * MaruyamaBot ENTRY POINT
 */
 
-import { Client, TextChannel, Message } from 'discord.js';
+import { Client } from 'discord.js';
 import { akaneAA } from "./misc/aa";
 import { messageHandlers } from './handlers';
 import dotenv from 'dotenv';
 import { getAdmins, getBotToken, getSiritoriChannel } from './misc/env';
+
+import meta from '../package.json';
 
 dotenv.config();
 
@@ -22,7 +24,7 @@ if (!getSiritoriChannel()) {
 
 console.log(akaneAA);
 
-console.log('Maruyama Bot v1.0.0');
+console.log(`Maruyama Bot v${meta.version}`);
 console.log("起動中...");
 
 const cli = new Client();

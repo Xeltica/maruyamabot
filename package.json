@@ -1,7 +1,7 @@
 {
    "name": "maruyama-bot",
-   "version": "1.0.0",
-   "description": "A bot for ee-disco server",
+   "version": "1.1.0",
+   "description": "A bot for e-e-disco server",
    "main": "built/app.js",
    "author": "Xeltica <xeltica@gmail.com>",
    "license": "MIT",
