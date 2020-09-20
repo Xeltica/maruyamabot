@@ -1,5 +1,9 @@
 import { Message, TextChannel } from 'discord.js';
 
+/**
+ * ピン留めされていないすべてのメッセージを取得します
+ * @param ch 取得対象のチャンネルあるいはID
+ */
 export async function fetchAllMessages(ch: TextChannel) {
     const res: Message[] = [];
 

@@ -2,17 +2,20 @@ import { Client, Message, TextChannel, UserFlags } from "discord.js";
 import errors from "../errors";
 import { getSiritoriChannel } from "../misc/env";
 import { fetchAllMessages } from "../misc/fetchAllMessages";
+import { isAdmin } from "../misc/isAdmin";
 import { define } from "./define";
 
-export default define('siritori-vacuum', 'しりとり部をリセットします', async (args: string[], msg: Message, cli: Client) => {
-    const id = getSiritoriChannel();
-    if (!id) return errors.siritoriChannelsNotDefined.toString();
+export default define('vacuum', '指定したチャンネルをリセットします', async (args: string[], msg: Message, cli: Client) => {
+    if (args.length !== 1) {
+        return '/vacuum <channel>';
+    }
+    const id = args[0];
 
     const ch = await cli.channels.fetch(id);
-    if (!(ch instanceof TextChannel)) return errors.notTextChannel.toString();
+    if (!(ch instanceof TextChannel)) return 'Specify the text channel.';
 
     if (!msg.guild) return 'サーバーから呼び出してください。';
-    if (msg.guild.ownerID !== msg.author.id) return 'サーバーの管理者のみ許可されています。';
+    if (isAdmin(msg.author.id, msg.guild)) return 'サーバーの管理者および許可されたユーザーにのみ許可されています。';
 
     try {
         await Promise.all((await fetchAllMessages(ch)).map(mes => ch.messages.delete(mes)))
