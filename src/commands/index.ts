@@ -1,3 +1,4 @@
+import channel from "./channel";
 import { define, MBCommandDefinition } from "./define";
 import echo from "./echo";
 import help from "./help";
@@ -17,6 +18,7 @@ const commands: readonly MBCommandDefinition[] = [
     isAdmin,
     isServerAdmin,
     whoami,
+    channel,
 ];
 
 export const getCommand = (name: string) => commands.find(c => c.name === name);
