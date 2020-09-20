@@ -6,6 +6,7 @@ import isServerAdmin from "./is-server-admin";
 import ping from "./ping";
 import siritoriStats from "./siritori-stats";
 import vacuum from "./vacuum";
+import whoami from "./whoami";
 
 const commands: readonly MBCommandDefinition[] = [
     ping,
@@ -15,6 +16,7 @@ const commands: readonly MBCommandDefinition[] = [
     siritoriStats,
     isAdmin,
     isServerAdmin,
+    whoami,
 ];
 
 export const getCommand = (name: string) => commands.find(c => c.name === name);
