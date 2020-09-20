@@ -14,7 +14,7 @@ export default define('vacuum', '指定したチャンネルをリセットし�
     if (!(ch instanceof TextChannel)) return 'Specify the text channel.';
 
     if (!msg.guild) return 'サーバーから呼び出してください。';
-    if (isAdmin(msg.author.id, msg.guild)) return 'サーバーの管理者および許可されたユーザーにのみ許可されています。';
+    if (!isAdmin(msg.author.id, msg.guild)) return 'サーバーの管理者および許可されたユーザーにのみ許可されています。';
 
     try {
         await Promise.all((await fetchAllMessages(ch)).map(mes => ch.messages.delete(mes)))
