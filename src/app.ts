@@ -37,15 +37,6 @@ const cli = new Client();
 cli.on('ready', async () => {
     console.log(`${cli.user?.username ?? 'NULL'} というアカウントでログインしました。`);
 
-    await cli.user?.setPresence({
-        status: 'online',
-        activity: {
-            name: '22/7 音楽の時間',
-            type: 'PLAYING',
-            url: 'https://227-game.com/',
-        }
-    });
-
     console.log('admin Id: ');
     for (const id of getAdmins()) {
         console.log(' ' + id);
