@@ -5,10 +5,12 @@
 import { Client } from 'discord.js';
 import { akaneAA } from "./misc/aa";
 import { messageHandlers } from './handlers';
+import workers from './workers';
 import dotenv from 'dotenv';
 import { getAdmins, getBotToken, getSiritoriChannel } from './misc/env';
 
 import meta from '../package.json';
+import commands from './commands';
 
 dotenv.config();
 
@@ -26,6 +28,9 @@ console.log(akaneAA);
 
 console.log(`Maruyama Bot v${meta.version}`);
 console.log("起動中...");
+console.log(`loaded ${messageHandlers.length} message handlers`);
+console.log(`loaded ${commands.length} commands`);
+console.log(`loaded ${workers.length} workers`);
 
 const cli = new Client();
 
@@ -50,5 +55,9 @@ cli.on('ready', async () => {
 cli.on('message', msg => {
     messageHandlers.forEach(handler => handler(msg, cli));
 });
+
+setInterval(() => {
+    workers.forEach(worker => worker(cli));
+}, 1000);
 
 cli.login(getBotToken());

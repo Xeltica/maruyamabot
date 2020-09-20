@@ -21,3 +21,4 @@ export async function fetchAllMessages(ch: TextChannel) {
     } while (temp.length > 0);
     return res;
 }
+
