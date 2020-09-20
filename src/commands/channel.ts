@@ -1,4 +1,4 @@
-import { Channel, Client, GuildChannel, Message, TextChannel } from "discord.js";
+import { Client, DiscordAPIError, Message, TextChannel } from "discord.js";
 import { extractChannels } from "../misc/extract";
 import { define } from "./define";
 
@@ -8,16 +8,18 @@ export default define('channel', '指定したチャンネルを情報を取得�
     }
     const id = extractChannels(args[0])[0];
 
-    const ch = id ? await cli.channels.fetch(id) : null;
-    if (!(ch instanceof TextChannel)) return 'Specify the text channel.';
-
     try {
-        return `**${ch.name}**${ch.nsfw ? ' (NSFW)' : ''}
-${ch.topic}
-
-作成日:${ch.createdAt.toLocaleString()}`;
-    } catch(e) {
+        const ch = id ? await cli.channels.fetch(id) : null;
+        if (!(ch instanceof TextChannel)) return 'Specify the text channel.';
+            return `**${ch.name}**${ch.nsfw ? ' (NSFW)' : ''}\n${ch.topic}\n\n作成日:${ch.createdAt.toLocaleString()}`;
+    } catch(e: unknown) {
         console.error(e);
-        return e;
+        if (e instanceof DiscordAPIError) {
+            return '存在しないチャンネルです。';
+        } else if (e instanceof Error) {
+            return `未知のエラーです。\n技術情報: ${e.name} ${e.message}`;
+        } else {
+            return '未知のエラーです。';
+        }
     }
 });
