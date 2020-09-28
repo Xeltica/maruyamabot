@@ -44,6 +44,7 @@ cli.on('ready', async () => {
 });
 
 cli.on('message', msg => {
+    if (msg.author.id === cli.user?.id) return;
     messageHandlers.forEach(handler => handler(msg, cli));
 });
 
